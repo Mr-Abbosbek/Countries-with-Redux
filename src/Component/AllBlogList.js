@@ -1,9 +1,12 @@
 import React, { useState, useMemo } from "react";
+import { useSelector } from "react-redux";
 import Blogs from "./Blogs";
 import FormList from "./FormList";
 
-function AllBlogs(data) {
-  const post = data.post;
+function AllBlogs() {
+
+  const post = useSelector(state => state.allCounters.counter);
+
   const [filter, setFilter] = useState({ sort: "", query: "" });
   const [select, setSelect] = useState({option: ""});
 
@@ -15,8 +18,6 @@ function AllBlogs(data) {
     }
     return post;
   }, [select.option, post]);
-
-  console.log(select.option);
 
   const sortedPosts = useMemo(() => {
     if (filter.sort) {
@@ -41,10 +42,10 @@ function AllBlogs(data) {
        
         {
           (filter.query)
-          ? <Blogs post={sortedAndSearchPosts} key={sortedAndSearchPosts.id} /> :
+          ? <Blogs posts={sortedAndSearchPosts} /> :
           (select.option)
-          ? <Blogs post={selectRegion} key={selectRegion.id} />
-          : <Blogs post={post} key={post.id} />
+          ? <Blogs posts={selectRegion}   />
+          : <Blogs posts={post} />
         }
         
     </div>

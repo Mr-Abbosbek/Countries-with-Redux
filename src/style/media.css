@@ -26,9 +26,8 @@
     padding-left: 28px !important;
     padding-right: 28px !important;
   }
-  .spinner-blog{
-    height: 48vh !important;
-    padding-top: 70px !important;
+  .spinner{
+    top: 76px !important;
   }
 }
 
@@ -39,11 +38,7 @@
     height: 300px !important;
   }
   .spinner{
-    height: 69.5vh !important;
-  }
-  .spinner-blog{
-    height: 48vh !important;
-    padding-top: 50px !important;
+    top: 74px !important;
   }
 }
 
@@ -75,11 +70,10 @@
     height: 100% !important;
   }
   .spinner{
-    height: 69.5vh !important;
+    top: 73.5px !important;
   }
-  .spinner-blog{
-    height: 48vh !important;
-    padding-top: 30px !important;
+  .content_box_404 p, .link_404{
+    font-size: 15px !important;
   }
 }
 
@@ -112,11 +106,7 @@
     padding-right: 0px !important;
   }
   .spinner{
-    height: 72vh !important;
-  }
-  .spinner-blog{
-    height: 48vh !important;
-    padding-top: 0px !important;
+    top: 94px !important;
   }
 }
 @media(max-width: 572.9px) and (min-width: 556px){

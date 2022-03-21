@@ -133,8 +133,14 @@ ul{
   height: 350px;
 }
 .spinner{
-  padding-top: 100px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 78px;
+  width: 100%;
+  margin: 0;
 }
+
 .border-region li{
   background: white;
   border-radius: 5px;
@@ -159,7 +165,7 @@ ul{
 .bodyColor .header, .bodyColor .darkBtn, .bodyColor .card, .bodyColor .form input, .bodyColor .form select,.bodyColor .back-button, .bodyColor .border-region li{
   background-color: #2b3844 !important;
 }
-.bodyColor .header .world, .bodyColor .darkBtn, .bodyColor .form .search-icon , .bodyColor .clear-icon, .bodyColor .form input, .bodyColor .form select, .bodyColor .form input::placeholder, .bodyColor .card, .bodyColor .Card-text h5, .bodyColor .Card-text .text_p, .bodyColor .back-button{
+.bodyColor .header .world, .bodyColor .darkBtn, .bodyColor .form .search-icon , .bodyColor .clear-icon, .bodyColor .form input, .bodyColor .form select, .bodyColor .form input::placeholder, .bodyColor .card, .bodyColor .Card-text h5, .bodyColor .Card-text .text_p, .bodyColor .back-button, .bodyColor .border_link{
   color: white !important;
 }
 .bodyColor .form-select{
