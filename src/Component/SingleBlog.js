@@ -17,6 +17,8 @@ function SingleBlog() {
   const allCounter = useSelector((state) => state.allCounters.counter);
   const counter = useSelector((state) => state.counter);
 
+  console.log(counter);
+
   let urlName = useParams();
   const dispatch = useDispatch();
 
@@ -94,7 +96,7 @@ function SingleBlog() {
       </div>
 
       <div className="pb-lg-3 pb-md-3 pb-sm-3 pb-0 blog-container singleBlog-blogs">
-        { counter.length ? (
+        { Object.keys(counter).length === 0 ? (
           <Row className="spinner spinner-blog m-0">
             <Col className="p-0 d-flex justify-content-center">
               <Loader width={"100%"} color={color} loading={loading} />
