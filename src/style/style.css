@@ -132,6 +132,9 @@ ul{
 .singleBlog-blogs img{
   height: 350px;
 }
+.image-height{
+  height: 350px !important;
+}
 .spinner{
   position: absolute;
   left: 0;

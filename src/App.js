@@ -3,22 +3,23 @@ import { useDispatch } from "react-redux";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import PostServerApi from './API/PostServiceApi'
 import Heder from "./Component/Heder";
-import { useFetching } from "./Component/hooks/useFetching";
 import SingleBlog from "./Component/SingleBlog";
 import AllBlogList from "./Component/AllBlogList";
 import { setCounter } from "./redux/actions/counterActions";
 
 function App() {
   const dispatch = useDispatch();
-  const [fetchPost]  = useFetching(async ()=>{
-    const data = await PostServerApi.getAllPost()
-          .catch((e)=>console.log("Error", e.message));
-    dispatch(setCounter(data));
-  });
+  // const [fetchPost]  = useFetching(async ()=>{
+  //   const data = await PostServerApi.getAllPost()
+  //         .catch((e)=>console.log("Error", e.message));
+  //   dispatch(setCounter(data));
+  // });
 
-  useEffect(() => {
-    fetchPost();
-  }, []);
+  useEffect( () => {
+    PostServerApi.getAllPost().then((res)=>{
+      dispatch(setCounter(res));
+    })
+  });
 
   return (
     <div>

@@ -3,9 +3,9 @@ import { Col, Image, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 import { BiArrowBack } from "react-icons/bi";
-import Error from "./Error";
+// import Error from "./Error";
 import { useDispatch, useSelector } from "react-redux";
-import { useFetching } from "./hooks/useFetching";
+// import { useFetching } from "./hooks/useFetching";
 import {
   removeSelectedCounter,
   selectedCounter,
@@ -17,28 +17,32 @@ function SingleBlog() {
   const allCounter = useSelector((state) => state.allCounters.counter);
   const counter = useSelector((state) => state.counter);
 
-  console.log(counter);
-
   let urlName = useParams();
   const dispatch = useDispatch();
 
-  const [fetchPost, isLoading, postError] = useFetching(async () => {
-    const data = await PostServerApi.getSinglePost(urlName.name).catch((e) =>
-      console.log("Error", e.message)
-    );
-    dispatch(selectedCounter(data[0]));
-  });
+  // const [isLoading, postError] = useFetching(async () => {
+  //   await PostServerApi.getSinglePost(urlName.name).catch((e) =>
+  //     console.log("Error", e.message)
+  //   );
+  // });
 
-  const fetchAndRemove = (urlName) => {
-    if (urlName && urlName.length !== 0) {
-      return fetchPost()
-    }
-    return ()=> dispatch(removeSelectedCounter());
-  }
+  // const fetchAndRemove = (urlName) => {
+  //   if (urlName && urlName.length !== 0) {
+  //     return fetchPost()
+  //   }
+  //   return ()=> dispatch(removeSelectedCounter());
+  // }
 
   useEffect(() => {
-    fetchAndRemove(urlName);
-  }, [urlName]);
+    if (urlName && urlName.length !== 0) {
+      PostServerApi.getSinglePost(urlName.name).then((res)=>{
+        dispatch(selectedCounter(res[0]));
+      }).catch((e) =>
+        console.log("Error", e.message)
+      );
+    }
+    return ()=> dispatch(removeSelectedCounter());
+  }, [urlName, dispatch]);
 
   let [loading] = useState(true);
   let [color] = useState("#36D7B7");
@@ -90,18 +94,17 @@ function SingleBlog() {
       </div>
 
       <div className="pb-lg-3 pb-md-3 pb-sm-3 pb-0 blog-container singleBlog-blogs">
-        {postError ? (
-          <Error />
-        ) : isLoading ? (
+        { counter.length ? (
           <Row className="spinner spinner-blog m-0">
             <Col className="p-0 d-flex justify-content-center">
               <Loader width={"100%"} color={color} loading={loading} />
             </Col>
           </Row>
-        ) : (
+        ) 
+        : (
           <div className="pb-lg-3 pb-md-3 pb-sm-3 pb-0 blog-container singleBlog-blogs">
             <Row className="all-row d-flex flex-wrap pb-5 m-0 px-lg-0 px-md-0 px-sm-0 px-0">
-              <Col className="m-0 col-lg-5 col-md-6 col-sm-12 col-12">
+              <Col className={flag ? "m-0 col-lg-5 col-md-6 col-sm-12 col-12" : "image-height m-0 col-lg-5 col-md-6 col-sm-12 col-12"}>
                 <Image src={flag} className="img-fluid p-0 w-100" />
               </Col>
               <Col className="px-lg-5 px-md-3  py-lg-0 py-md-0 py-sm-5 py-0 col-lg-7 col-md-6 col-sm-12 col-12">
