@@ -29,7 +29,7 @@ function Blogs({posts}) {
         </Row>
       </div> */}
       <div className="d-flex justify-content-center blog-container">
-        { posts.length === 0 ? (
+        { Object.keys(posts).length === 0 ? (
           <Row className="spinner spinner-blog m-0">
             <Col className="p-0 d-flex justify-content-center">
               <Loader width={"100%"} color={color} loading={loading} />
