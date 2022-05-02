@@ -108,6 +108,9 @@
   .spinner{
     top: 94px !important;
   }
+  .image-height{
+    height: 280px !important;
+  }
 }
 @media(max-width: 572.9px) and (min-width: 556px){
   .header-div{

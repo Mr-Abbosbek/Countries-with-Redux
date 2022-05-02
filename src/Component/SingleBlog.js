@@ -80,8 +80,6 @@ function SingleBlog() {
     latlng,
   } = counter;
 
-  console.log(latlng);
-
   let arr = [];
   if (languages) {
     languages.map((l) => {
@@ -118,13 +116,7 @@ function SingleBlog() {
         ) : (
           <div className="pb-lg-3 pb-md-3 pb-sm-3 pb-0 blog-container singleBlog-blogs">
             <Row className="all-row d-flex flex-wrap pb-5 m-0 px-lg-0 px-md-0 px-sm-0 px-0">
-              <Col
-                className={
-                  flag
-                    ? "m-0 col-lg-5 col-md-6 col-sm-12 col-12"
-                    : "image-height m-0 col-lg-5 col-md-6 col-sm-12 col-12"
-                }
-              >
+              <Col className="image-height m-0 col-lg-5 col-md-6 col-sm-12 col-12">
                 <Image src={flag} className="img-fluid p-0 w-100" />
               </Col>
               <Col className="px-lg-5 px-md-3  py-lg-0 py-md-0 py-sm-5 py-0 col-lg-7 col-md-6 col-sm-12 col-12">
@@ -221,7 +213,7 @@ function SingleBlog() {
               </Col>
             </Row>
             <Row className="border m-0">
-              <Col className="p-0">
+              <Col className="p-0" style={{ height: "400px" }}>
                 <YMaps className="w-100">
                   <Map
                     defaultState={{
@@ -230,14 +222,17 @@ function SingleBlog() {
                       zoom: 5,
                     }}
                     className="w-100"
-                    style={{ height: "400px"}}
-                    options={{borderColor: "red"}}
+                    style={{ height: "400px" }}
+                    options={{ borderColor: "red" }}
                   >
-                    <Placemark geometry={latlng} options={{iconColor: "red"}} />
+                    <Placemark
+                      geometry={latlng}
+                      options={{ iconColor: "red" }}
+                    />
                     <FullscreenControl />
                     <GeolocationControl options={{ float: "left" }} />
                     <RouteButton options={{ float: "right" }} />
-                    <TypeSelector options={{ float: "right" }} defaultMapTypes={{ mapTypes: "hybrid" }} />
+                    <TypeSelector options={{ float: "right" }} />
                     <ZoomControl options={{ float: "right" }} />
                   </Map>
                 </YMaps>
