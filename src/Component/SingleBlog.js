@@ -12,6 +12,16 @@ import {
 } from "../redux/actions/counterActions";
 import PostServerApi from "./../API/PostServiceApi";
 import Loader from "react-spinners/BarLoader";
+import {
+  FullscreenControl,
+  GeolocationControl,
+  Map,
+  Placemark,
+  RouteButton,
+  TypeSelector,
+  YMaps,
+  ZoomControl,
+} from "react-yandex-maps";
 
 function SingleBlog() {
   const allCounter = useSelector((state) => state.allCounters.counter);
@@ -37,13 +47,13 @@ function SingleBlog() {
 
   useEffect(() => {
     if (urlName && urlName.length !== 0) {
-      PostServerApi.getSinglePost(urlName.name).then((res)=>{
-        dispatch(selectedCounter(res[0]));
-      }).catch((e) =>
-        console.log("Error", e.message)
-      );
+      PostServerApi.getSinglePost(urlName.name)
+        .then((res) => {
+          dispatch(selectedCounter(res[0]));
+        })
+        .catch((e) => console.log("Error", e.message));
     }
-    return ()=> dispatch(removeSelectedCounter());
+    return () => dispatch(removeSelectedCounter());
   }, [urlName, dispatch]);
 
   let [loading] = useState(true);
@@ -67,7 +77,10 @@ function SingleBlog() {
     currencies,
     languages,
     borders,
+    latlng,
   } = counter;
+
+  console.log(latlng);
 
   let arr = [];
   if (languages) {
@@ -96,17 +109,22 @@ function SingleBlog() {
       </div>
 
       <div className="pb-lg-3 pb-md-3 pb-sm-3 pb-0 blog-container singleBlog-blogs">
-        { Object.keys(counter).length === 0 ? (
+        {Object.keys(counter).length === 0 ? (
           <Row className="spinner spinner-blog m-0">
             <Col className="p-0 d-flex justify-content-center">
               <Loader width={"100%"} color={color} loading={loading} />
             </Col>
           </Row>
-        ) 
-        : (
+        ) : (
           <div className="pb-lg-3 pb-md-3 pb-sm-3 pb-0 blog-container singleBlog-blogs">
             <Row className="all-row d-flex flex-wrap pb-5 m-0 px-lg-0 px-md-0 px-sm-0 px-0">
-              <Col className={flag ? "m-0 col-lg-5 col-md-6 col-sm-12 col-12" : "image-height m-0 col-lg-5 col-md-6 col-sm-12 col-12"}>
+              <Col
+                className={
+                  flag
+                    ? "m-0 col-lg-5 col-md-6 col-sm-12 col-12"
+                    : "image-height m-0 col-lg-5 col-md-6 col-sm-12 col-12"
+                }
+              >
                 <Image src={flag} className="img-fluid p-0 w-100" />
               </Col>
               <Col className="px-lg-5 px-md-3  py-lg-0 py-md-0 py-sm-5 py-0 col-lg-7 col-md-6 col-sm-12 col-12">
@@ -200,6 +218,29 @@ function SingleBlog() {
                     </Row>
                   </Col>
                 </Row>
+              </Col>
+            </Row>
+            <Row className="border m-0">
+              <Col className="p-0">
+                <YMaps className="w-100">
+                  <Map
+                    defaultState={{
+                      center: latlng,
+                      boundsColor: "red",
+                      zoom: 5,
+                    }}
+                    className="w-100"
+                    style={{ height: "400px"}}
+                    options={{borderColor: "red"}}
+                  >
+                    <Placemark geometry={latlng} options={{iconColor: "red"}} />
+                    <FullscreenControl />
+                    <GeolocationControl options={{ float: "left" }} />
+                    <RouteButton options={{ float: "right" }} />
+                    <TypeSelector options={{ float: "right" }} defaultMapTypes={{ mapTypes: "hybrid" }} />
+                    <ZoomControl options={{ float: "right" }} />
+                  </Map>
+                </YMaps>
               </Col>
             </Row>
           </div>

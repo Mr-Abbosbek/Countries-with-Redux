@@ -13,7 +13,7 @@ function App() {
   //   const data = await PostServerApi.getAllPost()
   //         .catch((e)=>console.log("Error", e.message));
   //   dispatch(setCounter(data));
-  // });
+  // }); 
 
   useEffect( () => {
     PostServerApi.getAllPost().then((res)=>{
